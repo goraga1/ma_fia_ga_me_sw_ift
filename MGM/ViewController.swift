@@ -9,10 +9,25 @@
 import UIKit
 
 class ViewController: UIViewController {
-                            
+    
+    let createButtonRect = CGRect(x: 0, y: 0, width: 200, height: 50)
+    let createButton: UIButton = {
+        let button = UIButton()
+        return button
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        createButton.frame = createButtonRect
+        createButton.center = CGPointMake(160.0, 240.0)
+        createButton.setTitle("Create new game", forState: UIControlState.Normal)
+        createButton.backgroundColor = UIColor.redColor()
+        createButton.addTarget(self, action: "createNewGame", forControlEvents: UIControlEvents.TouchUpInside)
+        self.view.addSubview(createButton)
+    }
+    
+    func createNewGame() {
+        println("It works")
     }
 
     override func didReceiveMemoryWarning() {
