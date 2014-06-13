@@ -28,10 +28,21 @@ class PlayerController : UIViewController, UITableViewDataSource, UITableViewDel
         return button
     }()
     
-    let tableViewRect = CGRectMake(0, 85, 320, UIScreen.mainScreen().bounds.size.height - 85)
+    let nextButtonRect = CGRect(x: 0, y: UIScreen.mainScreen().bounds.size.height - 45, width: UIScreen.mainScreen().bounds.size.width, height: 45)
+    let nextButton: UIButton = {
+        let button = UIButton()
+        return button
+    }()
+    
+    let tableViewRect = CGRectMake(0, 85, 320, UIScreen.mainScreen().bounds.size.height - 135)
     let tableView: UITableView = {
         let tableView = UITableView()
         return tableView
+    }()
+    
+    let doStepsController: DoStepsController = {
+        let controller = DoStepsController()
+        return controller
     }()
     
     override func viewDidLoad() {
@@ -59,6 +70,8 @@ class PlayerController : UIViewController, UITableViewDataSource, UITableViewDel
         addButton.addTarget(self, action: "addNewPlayer", forControlEvents: .TouchUpInside)
         self.view.addSubview(addButton)
         
+        
+        
         // Player list view
         
         tableView.delegate = self
@@ -68,12 +81,26 @@ class PlayerController : UIViewController, UITableViewDataSource, UITableViewDel
         tableView.backgroundColor = UIColor.redColor()
         self.view.addSubview(tableView)
         
+        // Next button
+        
+        nextButton.frame = nextButtonRect
+        nextButton.setTitle("Next", forState: .Normal)
+        nextButton.backgroundColor = UIColor.greenColor()
+        nextButton.addTarget(self, action: "goToStepsPage", forControlEvents: .TouchUpInside)
+        self.view.addSubview(nextButton)
+        
     }
     
     // Add button handler
     
     func addNewPlayer() {
         
+    }
+    
+    // Next button handler
+    
+    func goToStepsPage() {
+        self.presentViewController(doStepsController, animated: true, completion: nil)
     }
     
     // Table view delegate

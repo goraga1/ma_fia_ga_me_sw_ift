@@ -56,6 +56,8 @@ class DoStepsController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.view.backgroundColor = UIColor.whiteColor()
+        
         firstStepLabel.frame = firstStepLabelRec
         secondStepLabel.frame = firstStepLabelRec
         thirdStepLabel.frame = firstStepLabelRec
