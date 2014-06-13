@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		41E92574194B44AB002118B1 /* DoStepsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41E92573194B44AB002118B1 /* DoStepsController.swift */; };
 		DC3E719F194B39530034AD96 /* PlayerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC3E719E194B39530034AD96 /* PlayerController.swift */; };
 		DC9D1C76194B1ED60061F1F5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC9D1C75194B1ED60061F1F5 /* AppDelegate.swift */; };
 		DC9D1C78194B1ED60061F1F5 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC9D1C77194B1ED60061F1F5 /* ViewController.swift */; };
@@ -26,6 +27,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		41E92573194B44AB002118B1 /* DoStepsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DoStepsController.swift; sourceTree = "<group>"; };
 		DC3E719E194B39530034AD96 /* PlayerController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerController.swift; sourceTree = "<group>"; };
 		DC9D1C70194B1ED60061F1F5 /* MGM.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MGM.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DC9D1C74194B1ED60061F1F5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -83,6 +85,7 @@
 				DC9D1C79194B1ED60061F1F5 /* Main.storyboard */,
 				DC9D1C7C194B1ED60061F1F5 /* Images.xcassets */,
 				DC9D1C73194B1ED60061F1F5 /* Supporting Files */,
+				41E92573194B44AB002118B1 /* DoStepsController.swift */,
 			);
 			path = MGM;
 			sourceTree = "<group>";
@@ -211,6 +214,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				41E92574194B44AB002118B1 /* DoStepsController.swift in Sources */,
 				DC9D1C78194B1ED60061F1F5 /* ViewController.swift in Sources */,
 				DC9D1C76194B1ED60061F1F5 /* AppDelegate.swift in Sources */,
 				DC3E719F194B39530034AD96 /* PlayerController.swift in Sources */,
