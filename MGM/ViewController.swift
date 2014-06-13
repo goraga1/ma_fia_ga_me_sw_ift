@@ -16,6 +16,11 @@ class ViewController: UIViewController {
         return button
     }()
     
+    let playerController: PlayerController = {
+        let controller = PlayerController()
+        return controller
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         createButton.frame = createButtonRect
@@ -28,6 +33,7 @@ class ViewController: UIViewController {
     
     func createNewGame() {
         println("It works")
+        self.presentViewController(playerController, animated: true, completion: nil)
     }
 
     override func didReceiveMemoryWarning() {
