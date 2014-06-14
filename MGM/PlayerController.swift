@@ -8,14 +8,11 @@
 
 import UIKit
 
-protocol PlayerDelegate {
-    func getPlayersList(playersList: String[])
-}
 
 class PlayerController : UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     var dataSource: String[] = []
-    var delegate: PlayerDelegate?
+  
     
     let playerNameFieldRect = CGRect(x: 5, y: 30, width: 265, height: 50)
     let playerNameField: UITextField = {
@@ -47,8 +44,8 @@ class PlayerController : UIViewController, UITableViewDataSource, UITableViewDel
         return tableView
     }()
     
-    let doStepsController: DoStepsController = {
-        let controller = DoStepsController()
+    let generateController: GenerateController = {
+        let controller = GenerateController()
         return controller
     }()
     
@@ -91,7 +88,7 @@ class PlayerController : UIViewController, UITableViewDataSource, UITableViewDel
         nextButton.frame = nextButtonRect
         nextButton.setTitle("Next", forState: .Normal)
         nextButton.backgroundColor = UIColor.greenColor()
-        nextButton.addTarget(self, action: "goToStepsPage", forControlEvents: .TouchUpInside)
+        nextButton.addTarget(self, action: "goToGeneratePage", forControlEvents: .TouchUpInside)
         self.view.addSubview(nextButton)
         
     }
@@ -100,6 +97,11 @@ class PlayerController : UIViewController, UITableViewDataSource, UITableViewDel
     
     func addNewPlayer() {
 //        dataSource[0] += playerNameField.text
+        if dataSource.count == 12 {
+            goToGeneratePage()
+            return
+        }
+        
         dataSource.append(playerNameField.text)
         playerNameField.text = ""
         tableView.reloadData()
@@ -107,8 +109,8 @@ class PlayerController : UIViewController, UITableViewDataSource, UITableViewDel
     
     // Next button handler
     
-    func goToStepsPage() {
-        self.presentViewController(doStepsController, animated: true, completion: nil)
+    func goToGeneratePage() {
+        self.presentViewController(generateController, animated: true, completion: nil)
     }
     
     // Table view delegate

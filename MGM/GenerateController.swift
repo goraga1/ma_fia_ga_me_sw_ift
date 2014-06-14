@@ -8,95 +8,83 @@
 
 import UIKit
 
-class GenerateController : UIViewController {
 
+
+class GenerateController : UIViewController {
     
-    let array = ["Mafia","Mafia", "Citizen", "Citizen", "Citizen", "Citizen", "Citizen","Citizen","Citizen","Sheriff", "Don"]
+    var roles = ["Mafia","Mafia", "Citizen", "Citizen", "Citizen", "Citizen", "Citizen","Citizen","Citizen","Sheriff", "Don"]
+    var players: String[] = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L"]
+    var playerFinalList: String[][] = [[], []]
     
-        let pArray = ["p1","p2", "p3", "p4", "p5", "p6", "p7","p8","p9","p10", "p11"]
-     var imageView = UIImageView(frame: CGRectMake(100, 150, 150, 150));
-      var label = UILabel(frame: CGRectMake(0, 0, 200, 21))
+    var imageView = UIImageView(frame: CGRectMake(0, 30, UIScreen.mainScreen().bounds.size.width, UIScreen.mainScreen().bounds.size.height - 130));
+    var label = UILabel(frame: CGRectMake(0, UIScreen.mainScreen().bounds.size.height - 75, UIScreen.mainScreen().bounds.size.width, 20))
     
     
-    var sheriff = UIImage(named: "Sheriff.png");
-    var don = UIImage(named: "Don.png");
-    var mafia = UIImage(named: "Mafia.png");
-    var citizen = UIImage(named: "Citizen.jpg");
+    let sheriff = UIImage(named: "Sheriff.png");
+    let don = UIImage(named: "Don.png");
+    let mafia = UIImage(named: "Mafia.png");
+    let citizen = UIImage(named: "Citizen.jpg");
     
-    let cButtonRect = CGRect(x: 0 , y:0 ,width:200 , height:50)
+    let cButtonRect = CGRect(x: 0 , y:UIScreen.mainScreen().bounds.size.height - 95, width:200 , height:50)
     let cButton: UIButton = {
         let bt = UIButton()
         return bt
-        }()
-    
-    let cImageView = CGRect(x: 0 , y:0 ,width:600 , height:450)
-    let cView: UIImage = {
-        let im = UIImage()
-        return im
-        }()
-    
+    }()
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         self.view.backgroundColor = UIColor.whiteColor();
+        
+        self.view.addSubview(imageView);
+        
         cButton.frame = cButtonRect
-        cButton.center=CGPointMake(160, 460)
-        cButton.setTitle("Create new game", forState: UIControlState.Normal)
+        cButton.center = CGPoint(x: UIScreen.mainScreen().bounds.size.width / 2, y: UIScreen.mainScreen().bounds.size.height - 30)
+        cButton.setTitle("Next player", forState: UIControlState.Normal)
         cButton.backgroundColor = UIColor.blueColor()
-        cButton.addTarget(self, action: "genCards", forControlEvents: UIControlEvents.TouchUpInside)
+        cButton.addTarget(self, action: "generateNext", forControlEvents: UIControlEvents.TouchUpInside)
         self.view.addSubview(cButton)
-        
-        
-       
-        
-
-        
-        
-
-        
-        
-        
     }
     
     
     
-    func genCards() {
-        let randomIndex = Int(arc4random_uniform(UInt32(array.count)))
-
-        
-        switch array[randomIndex] {
-        case "Mafia":
-            println("mafia!")
-            imageView.image = mafia;
-        case "Sheriff":
-            println("Sheriff")
-                  imageView.image = sheriff;
-        case "Don":
-            println("Don")
-              imageView.image = don;
-        case "Citizen":
-               imageView.image = citizen;
-            println("citi")
-        
-        default:
-                println("222")
+    func generateNext() {
+        println(roles.count)
+        if roles.count == 0 {
+            self.presentViewController(PlayerController(), animated: true, completion: nil)
+            println(playerFinalList)
+            return
         }
         
+        let randomIndex = roles.count == 1 ? 0 : Int(arc4random_uniform(UInt32(roles.count)))
+        let role = roles[randomIndex]
+        let player = players[randomIndex]
         
+        switch role {
+        case "Mafia":
+            imageView.image = mafia;
+            playerFinalList[0] += player
+        case "Sheriff":
+            imageView.image = sheriff;
+            playerFinalList[1] += player
+        case "Don":
+            imageView.image = don;
+            playerFinalList[0] += player
+        case "Citizen":
+            imageView.image = citizen;
+            playerFinalList[1] += player
+        default:
+            println("Unknown role")
+        }
         
-      
-        label.center = CGPointMake(160, 384)
+        roles.removeAtIndex(randomIndex)
+        players.removeAtIndex(randomIndex)
+        
+        label.center = CGPoint(x: UIScreen.mainScreen().bounds.size.width / 2, y: UIScreen.mainScreen().bounds.size.height - 80)
         label.textAlignment = NSTextAlignment.Center
-        label.text = pArray[randomIndex]
+        label.text = player
         self.view.addSubview(label)
-    
-   
-        
-        
-        
-        self.view.addSubview(imageView);
-    
     }
     
     
