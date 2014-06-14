@@ -8,9 +8,16 @@
 
 import UIKit
 
+protocol PlayerDelegate {
+    func getPlayersList(playersList: String[])
+}
+
 class PlayerController : UIViewController, UITableViewDataSource, UITableViewDelegate {
     
-    let playerNameFieldRect = CGRect(x: 0, y: 30, width: 270, height: 50)
+    var dataSource: String[] = []
+    var delegate: PlayerDelegate?
+    
+    let playerNameFieldRect = CGRect(x: 5, y: 30, width: 265, height: 50)
     let playerNameField: UITextField = {
         let textField = UITextField()
         return textField
@@ -70,15 +77,13 @@ class PlayerController : UIViewController, UITableViewDataSource, UITableViewDel
         addButton.addTarget(self, action: "addNewPlayer", forControlEvents: .TouchUpInside)
         self.view.addSubview(addButton)
         
-        
-        
         // Player list view
         
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cell")
         
         tableView.frame = tableViewRect
-        tableView.backgroundColor = UIColor.redColor()
         self.view.addSubview(tableView)
         
         // Next button
@@ -94,7 +99,10 @@ class PlayerController : UIViewController, UITableViewDataSource, UITableViewDel
     // Add button handler
     
     func addNewPlayer() {
-        
+//        dataSource[0] += playerNameField.text
+        dataSource.append(playerNameField.text)
+        playerNameField.text = ""
+        tableView.reloadData()
     }
     
     // Next button handler
@@ -110,14 +118,19 @@ class PlayerController : UIViewController, UITableViewDataSource, UITableViewDel
     }
     
     func tableView(tableView: UITableView!, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        return dataSource.count
     }
     
     func tableView(tableView: UITableView!, cellForRowAtIndexPath indexPath: NSIndexPath!) -> UITableViewCell! {
-        let cell: UITableViewCell = UITableViewCell(style: UITableViewCellStyle.Subtitle, reuseIdentifier: "MyTestCell")
+        let cell = tableView!.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath!) as UITableViewCell
         
-        cell.text = "Row #\(indexPath.row)"
-        cell.detailTextLabel.text = "Subtitle #\(indexPath.row)"
+        if let path = indexPath {
+            let currentString = dataSource[path.row]
+            
+            if currentString != nil {
+                cell.text = toString(currentString)
+            }
+        }
         
         return cell
     }
@@ -127,7 +140,15 @@ class PlayerController : UIViewController, UITableViewDataSource, UITableViewDel
     }
     
     func tableView(tableView: UITableView!, titleForHeaderInSection section: Int) -> String! {
-        return ""
+//        switch(section) {
+//        case 0:
+//            return "Citizen"
+//        case 1:
+//            return "Mafia"
+//        default:
+//            return ""
+//        }
+        return "Players"
     }
     
     
